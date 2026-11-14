@@ -39,13 +39,13 @@ async function paypal(path, method = 'GET', body) {
     body: 'grant_type=client_credentials',
   });
   if (!auth.ok) throw new Error(`PayPal auth ${auth.status}`);
-  const { access_token } = await auth.json();
+  const { access_token, scope } = await auth.json();
   const res = await fetch(base + path, {
     method,
     headers: { Authorization: `Bearer ${access_token}`, 'Content-Type': 'application/json' },
     body: body && JSON.stringify(body),
   });
-  return { status: res.status, data: await res.json().catch(() => ({})) };
+  return { status: res.status, data: await res.json().catch(() => ({})), scope };
 }
 
 const actions = {
@@ -61,9 +61,13 @@ const actions = {
 
   async capture({ orderID }) {
     if (!PAYPAL_ID.test(orderID)) return json({ error: 'orden inválida' }, 400);
-    const { data } = await paypal(`/v2/checkout/orders/${orderID}/capture`, 'POST');
+    const { status, data, scope } = await paypal(`/v2/checkout/orders/${orderID}/capture`, 'POST');
     const capture = data.purchase_units?.[0]?.payments?.captures?.[0];
-    if (data.status !== 'COMPLETED' || !capture) return json({ error: 'el pago no se completó' }, 402);
+    if (data.status !== 'COMPLETED' || !capture) {
+      // Sin esto un cobro rechazado no deja rastro; los permisos (scope) del token explican los 403.
+      console.error('PayPal capture', status, data.name, data.details?.[0]?.issue, data.status, 'scope:', scope);
+      return json({ error: 'el pago no se completó' }, 402);
+    }
     return json({ key: capture.id });
   },
 
