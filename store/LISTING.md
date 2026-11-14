@@ -164,3 +164,13 @@ Data: no analytics, no ads, no personal data collected.
 - **Borrador creado:** 14/11/2026, con el paquete `ChalaScrape-1.0.0.zip`.
 - Durante la revisión: mantener en línea `https://chalascrape.vercel.app` (tienda y política de privacidad).
 - Al publicarse: anotar aquí la fecha y confirmar la URL.
+
+## 10. Versión 1.0.1 (preparada, sin enviar)
+
+- `dist/ChalaScrape-1.0.1.zip` generado el 14/11/2026. Único cambio: `SERVER` apunta a `https://scrape.chaladev.site` (mismo proyecto de Vercel; `chalascrape.vercel.app` sigue activo para la 1.0.0).
+- **Al lanzarla:**
+  1. Cambiar `chalascrape.vercel.app` por `scrape.chaladev.site` en `server/public/privacy.html` (texto de la sección 3) y en la URL de política de la ficha de cada tienda; subir y esperar el despliegue.
+  2. Subir el ZIP: en Edge, entrar al elemento y **Update**; para Chrome es la versión inicial.
+  3. Repetir las notas de certificación con el dominio nuevo.
+  4. Probar con `LICENSE_KEY=<clave real> node test/e2e.mjs …`.
+- No lanzar antes de que Edge termine la revisión de la 1.0.0.

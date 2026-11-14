@@ -3,7 +3,7 @@
 // (PayPal exige una credencial secreta para consultarlo, que no puede vivir dentro de la extensión).
 
 // ▼▼ Configuración: URL donde desplegaste la carpeta server/ (sin barra final) ▼▼
-const SERVER = 'https://chalascrape.vercel.app';
+const SERVER = 'https://scrape.chaladev.site';
 // ▲▲ Vacío = las claves reales se rechazan y solo funciona la clave de desarrollo ▲▲
 
 const RECHECK_MS = 24 * 60 * 60 * 1000;
