@@ -62,4 +62,4 @@ node test/e2e.mjs "C:\Program Files\Google\Chrome\Application\chrome.exe" "<ruta
 powershell -ExecutionPolicy Bypass -File scripts\pack.ps1
 ```
 
-Genera `dist/ChalaScrape-<versión>.zip` solo con lo que necesita la extensión. Los textos, capturas y pasos de cada tienda están en [store/LISTING.md](store/LISTING.md) (Edge Add-ons) y [store/CHROME.md](store/CHROME.md) (Chrome Web Store).
+Genera `dist/ChalaScrape-<versión>.zip` solo con lo que necesita la extensión. El paso a paso para subirla a cada tienda, con todas las opciones, está en [store/GUIA.md](store/GUIA.md). Los textos para copiar están en [store/LISTING.md](store/LISTING.md).

@@ -1,12 +1,12 @@
 # ChalaScrape en Chrome Web Store
 
-Guía para subir la extensión a mano en el panel de desarrollador: <https://chrome.google.com/webstore/devconsole>.
-Los textos largos son los mismos de [LISTING.md](LISTING.md); aquí solo va el orden de Chrome y lo que cambia.
+Resumen de lo que cambia en Chrome respecto a [LISTING.md](LISTING.md). El paso a paso con todas las opciones está en [GUIA.md](GUIA.md#4-chrome-web-store).
+Panel de desarrollador: <https://chrome.google.com/webstore/devconsole>.
 
 ## 0. Antes de empezar: el límite de extensiones
 
 El panel muestra **«Límite de extensiones: 2/2»** (Chalablock y ChalaVPN). Con el cupo lleno no se puede crear un elemento nuevo.
-Hay que pedir el aumento desde el enlace de ayuda de ese mismo aviso, o archivar un elemento, antes de subir ChalaScrape.
+Una cuenta nueva admite como máximo dos extensiones publicadas. Hay que pedir el aumento desde ese mismo aviso antes de subir ChalaScrape; según la documentación la decisión suele ser inmediata.
 
 ## 1. Subir el paquete
 
@@ -21,7 +21,7 @@ ChalaScrape no usa inicio de sesión, así que no hay que registrar el ID del el
 | Descripción | La de LISTING.md, sección 5 (español) o 6 (inglés) |
 | Categoría | *Herramientas* (o *Flujo de trabajo y planificación*) |
 | Idioma | Español; añade inglés si el panel lo ofrece |
-| Icono de la tienda | `icons/icon128.png` |
+| Icono de la tienda (128×128, con margen transparente) | `store/screenshots/icono-tienda-128.png` |
 | Capturas (1280×800) | `store/screenshots/01-deteccion-tarjetas.png`, `02-tabla-detectada.png`, `03-plan-pro.png` |
 | Mosaico promocional pequeño (440×280) | `store/screenshots/promo-440x280.png` |
 | Sitio web oficial | `https://chalascrape.vercel.app` |
