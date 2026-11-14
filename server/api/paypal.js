@@ -71,6 +71,13 @@ const actions = {
     return json({ key: capture.id });
   },
 
+  // TEMPORAL (diagnóstico): ¿este token puede leer una orden?
+  async probe({ orderID }) {
+    if (!PAYPAL_ID.test(orderID)) return json({ error: 'orden inválida' }, 400);
+    const { status, data } = await paypal(`/v2/checkout/orders/${orderID}`);
+    return json({ status, order: data.status, name: data.name, custom: data.purchase_units?.[0]?.custom_id });
+  },
+
   async license({ key }) {
     const id = String(key || '').trim().toUpperCase();
     if (!PAYPAL_ID.test(id)) return json({ valid: false });
