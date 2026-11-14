@@ -31,6 +31,8 @@ globalThis.fetch = async (url, init = {}) => {
   }
   if (path === '/v2/checkout/orders/DECLINED00000001/capture') return reply({ name: 'UNPROCESSABLE_ENTITY' }, 422);
   if (path === '/v2/payments/captures/PAYPALDOWN00000001') return reply({}, 503);
+  if (path === '/v2/payments/captures/AJENO0000000000001') return reply({ name: 'NOT_AUTHORIZED' }, 401);
+  if (path === '/v2/payments/captures/TOKENMALO000000001') return reply({ error: 'invalid_token' }, 401);
   const capture = captures[path.split('/').pop()];
   return capture ? reply(capture) : reply({ name: 'RESOURCE_NOT_FOUND' }, 404);
 };
@@ -57,7 +59,9 @@ assert.deepEqual([valid.data, valid.cors], [{ valid: true }, '*']);
 assert.deepEqual((await call('license', { key: 'REFUNDED0000000001' })).data, { valid: false }, 'reembolso invalida');
 assert.deepEqual((await call('license', { key: 'OTHERPRODUCT000001' })).data, { valid: false }, 'otro producto no vale');
 assert.deepEqual((await call('license', { key: 'NOEXISTE0000000001' })).data, { valid: false });
+assert.deepEqual((await call('license', { key: 'AJENO0000000000001' })).data, { valid: false }, 'cobro ajeno o inexistente (401 real de PayPal)');
 assert.equal((await call('license', { key: 'PAYPALDOWN00000001' })).status, 502, 'caída de PayPal no es "inválida"');
+assert.equal((await call('license', { key: 'TOKENMALO000000001' })).status, 502, 'fallo de credenciales no es "inválida"');
 
 // Entradas maliciosas: no deben llegar a PayPal.
 const before = calls.length;

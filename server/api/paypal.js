@@ -71,7 +71,8 @@ const actions = {
     const id = String(key || '').trim().toUpperCase();
     if (!PAYPAL_ID.test(id)) return json({ valid: false });
     const { status, data } = await paypal(`/v2/payments/captures/${id}`);
-    if (status === 404) return json({ valid: false });
+    // PayPal contesta 401 NOT_AUTHORIZED (no 404) cuando el cobro no existe o es de otra cuenta.
+    if (status === 404 || (status === 401 && data.name === 'NOT_AUTHORIZED')) return json({ valid: false });
     // Cualquier otro fallo (credenciales, límite de tasa, caída) NO es "clave inválida":
     // responder false le quitaría Pro a clientes que sí pagaron.
     if (status !== 200) throw new Error(`PayPal capture ${status} ${JSON.stringify(data).slice(0, 300)}`);
