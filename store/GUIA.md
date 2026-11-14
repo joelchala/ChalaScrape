@@ -125,6 +125,8 @@ Una cuenta nueva puede tener como máximo dos extensiones publicadas, y la tuya 
 
 Según la documentación, la decisión suele ser inmediata; si se abre un caso de soporte, tarda unos días. Pueden negarlo si las extensiones publicadas tienen poco uso o la cuenta es muy reciente, y en ese caso te dicen el motivo. No hay nada que yo pueda hacer para acelerarlo.
 
+**Estado al 14/11/2026:** la solicitud fue negada por «requisitos de antigüedad y actividad». Chrome queda en espera; el detalle está en [CHROME.md](CHROME.md#7-estado).
+
 ### 4.1 Subir el paquete
 
 1. **Nuevo elemento** (*Add new item*).

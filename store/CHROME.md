@@ -48,10 +48,13 @@ Pegar las notas de certificación de LISTING.md, sección 7.
 
 ## 6. Antes de enviar a revisión
 
-- [ ] Hay cupo para un elemento nuevo (paso 0).
+- [ ] Hay cupo para un elemento nuevo (paso 0). Negado el 14/11/2026; ver Estado.
 - [ ] La cuenta de desarrollador tiene el correo de contacto verificado.
 - [ ] `chalascrape.vercel.app` sigue en línea durante la revisión.
 
 ## 7. Estado
 
-- Sin enviar.
+- **En espera.** Sin enviar: no hay cupo para crear el elemento.
+- **14/11/2026:** Joel pidió el aumento del límite de extensiones y Chrome lo negó: «Tu cuenta de editor no cumple actualmente nuestros requisitos de antigüedad y actividad». El panel permite volver a pedirlo más adelante.
+- **Plan:** esperar a que se publiquen las extensiones que están en revisión y volver a solicitar el aumento. Chrome no publica cuánta antigüedad o actividad exige, así que no hay fecha.
+- El paquete y la ficha están listos; cuando haya cupo se sigue [GUIA.md](GUIA.md#4-chrome-web-store) desde el paso 4.1.
