@@ -81,7 +81,9 @@ const actions = {
     // Cualquier otro fallo (credenciales, límite de tasa, caída) NO es "clave inválida":
     // responder false le quitaría Pro a clientes que sí pagaron.
     if (status !== 200) throw new Error(`PayPal capture ${status} ${JSON.stringify(data).slice(0, 300)}`);
-    const valid = data.status === 'COMPLETED' && data.custom_id === PRODUCT;
+    // PENDING = PayPal retiene el pago en revisión (horas): el cliente ya pagó, así que vale.
+    // Si la revisión falla el estado pasa a DECLINED/FAILED y la revalidación diaria le quita Pro.
+    const valid = ['COMPLETED', 'PENDING'].includes(data.status) && data.custom_id === PRODUCT;
     // Deja rastro de por qué un cobro real no vale como licencia (pendiente, reembolsado, de otro producto).
     if (!valid) console.warn('PayPal license', id, data.status, data.status_details?.reason, data.custom_id);
     return json({ valid });

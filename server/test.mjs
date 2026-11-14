@@ -8,6 +8,8 @@ const { default: app } = await import('./api/paypal.js');
 const captures = {
   GOODCAPTURE0000001: { status: 'COMPLETED', custom_id: 'chalascrape-pro' },
   REFUNDED0000000001: { status: 'REFUNDED', custom_id: 'chalascrape-pro' },
+  PENDING00000000001: { status: 'PENDING', custom_id: 'chalascrape-pro' },
+  DECLINED0000000001: { status: 'DECLINED', custom_id: 'chalascrape-pro' },
   OTHERPRODUCT000001: { status: 'COMPLETED', custom_id: 'otro-producto' },
 };
 const calls = [];
@@ -57,6 +59,8 @@ assert.equal((await call('capture', { orderID: 'DECLINED00000001' })).status, 40
 const valid = await call('license', { key: ' goodcapture0000001 ' });
 assert.deepEqual([valid.data, valid.cors], [{ valid: true }, '*']);
 assert.deepEqual((await call('license', { key: 'REFUNDED0000000001' })).data, { valid: false }, 'reembolso invalida');
+assert.deepEqual((await call('license', { key: 'PENDING00000000001' })).data, { valid: true }, 'pago en revisión vale');
+assert.deepEqual((await call('license', { key: 'DECLINED0000000001' })).data, { valid: false }, 'revisión rechazada invalida');
 assert.deepEqual((await call('license', { key: 'OTHERPRODUCT000001' })).data, { valid: false }, 'otro producto no vale');
 assert.deepEqual((await call('license', { key: 'NOEXISTE0000000001' })).data, { valid: false });
 assert.equal((await call('license', { key: 'AJENO0000000000001' })).status, 502, 'falta de permisos no es "inválida"');
