@@ -22,7 +22,7 @@ const env = () => ({
   id: process.env.PAYPAL_CLIENT_ID,
   secret: process.env.PAYPAL_CLIENT_SECRET,
   base: process.env.PAYPAL_ENV === 'live' ? 'https://api-m.paypal.com' : 'https://api-m.sandbox.paypal.com',
-  price: process.env.PRICE || '19.00',
+  price: process.env.PRICE || '9.99',
   currency: process.env.CURRENCY || 'USD',
 });
 
@@ -69,6 +69,14 @@ const actions = {
       return json({ error: 'el pago no se completó' }, 402);
     }
     return json({ key: capture.id });
+  },
+
+  // TEMPORAL (diagnóstico): ¿este token puede usar la API de suscripciones, como ChalaVPN?
+  async probe() {
+    const plans = await paypal('/v1/billing/plans?page_size=1');
+    const products = await paypal('/v1/catalogs/products?page_size=1');
+    const sub = await paypal('/v1/billing/subscriptions/I-NOEXISTE00001');
+    return json({ plans: plans.status, products: products.status, subscription: [sub.status, sub.data.name] });
   },
 
   async license({ key }) {

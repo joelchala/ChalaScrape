@@ -39,7 +39,7 @@ La clave de licencia es el ID del cobro en PayPal. El backend la valida consult√
    | `PAYPAL_CLIENT_ID` | Client ID de la app |
    | `PAYPAL_CLIENT_SECRET` | Secret de la app |
    | `PAYPAL_ENV` | `sandbox` o `live` |
-   | `PRICE` | Precio, p. ej. `19.00` |
+   | `PRICE` | Precio, p. ej. `9.99` |
    | `CURRENCY` | Moneda, p. ej. `USD` |
 
 3. En `sidepanel/license.js`, pon la URL del despliegue en `SERVER` (hoy: `https://chalascrape.vercel.app`).
