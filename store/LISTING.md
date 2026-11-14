@@ -157,13 +157,10 @@ Data: no analytics, no ads, no personal data collected.
 
 ## 9. Estado del envío
 
-- **Borrador creado:** 14/11/2026. Paquete `ChalaScrape-1.0.0.zip` subido y verificado por Partner Center (idiomas: español e inglés; permisos: sidePanel, activeTab, scripting, storage).
-- **Product ID:** `b99d44ce-b19b-4c06-a5f2-9b1657ae771d`
-- **Estado al 14/11/2026, 07:15:** «In draft». **No se ha enviado a revisión.** Todo el formulario está completo:
-  - *Availability*: Public, 241 de 241 mercados.
-  - *Properties*: categoría Productivity, sitio web y contacto de soporte.
-  - *Privacy*: propósito único, las cuatro justificaciones, sin código remoto, dato declarado «Authentication information», URL de la política y las tres certificaciones.
-  - *Store listings*: inglés y español en «Complete», con descripción, términos de búsqueda, logo e imágenes.
-  - *Submit your extension*: notas de certificación escritas (1693 de 2000 caracteres) y marcada la opción «Yes, I need to provide credentials, accounts, or other info for testers».
-- **Falta para enviar:** pulsar **Publish** en la pantalla *Submit your extension*.
-- Al enviar: anotar aquí la fecha y, cuando se publique, el Store ID, el CRX ID y la URL.
+- **Enviado a revisión:** 14/11/2026, 07:17, versión 1.0.0. Estado en Partner Center: «In review». Microsoft indica hasta 7 días hábiles.
+- **Store ID:** `0RDCKC32CR7V` · **CRX ID:** `onapjfkfnjifcegfkcdnjdobfddmddgi` · **Product ID:** `b99d44ce-b19b-4c06-a5f2-9b1657ae771d`
+- **URL pública:** disponible cuando se publique. Será `https://microsoftedge.microsoft.com/addons/detail/onapjfkfnjifcegfkcdnjdobfddmddgi`.
+- **Lo enviado:** categoría Productivity, visibilidad Public en 241 mercados, idiomas español e inglés, dato declarado «Authentication information», y las notas de certificación de la sección 7 con la opción «Yes, I need to provide credentials, accounts, or other info for testers».
+- **Borrador creado:** 14/11/2026, con el paquete `ChalaScrape-1.0.0.zip`.
+- Durante la revisión: mantener en línea `https://chalascrape.vercel.app` (tienda y política de privacidad).
+- Al publicarse: anotar aquí la fecha y confirmar la URL.
