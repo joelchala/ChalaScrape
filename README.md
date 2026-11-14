@@ -22,10 +22,16 @@ Extensión para Chrome y Edge (Manifest V3) que extrae tablas, listas y tarjetas
 
 Para probar el plan Pro en desarrollo, pulsa la insignia **FREE** e ingresa `CHALA-DEV-2026`. Esa clave solo funciona en instalaciones sin empaquetar.
 
+## Estado (14/11/2026)
+
+- **Edge Add-ons:** 1.0.0 en revisión desde el 14/11/2026. **Chrome Web Store:** en espera (cupo de extensiones). Detalle en [store/LISTING.md](store/LISTING.md) y [store/CHROME.md](store/CHROME.md).
+- **1.0.1** preparada (usa `scrape.chaladev.site`), sin lanzar: pasos en [store/LISTING.md](store/LISTING.md), sección 10.
+- **Backend:** `chalascrape.vercel.app` y `scrape.chaladev.site` (mismo proyecto de Vercel).
+
 ## Planes
 
 - **Free:** detección y vista previa ilimitadas; exporta CSV con un máximo de 50 filas.
-- **Pro:** filas ilimitadas, paginación automática, scroll infinito y exportación a Excel.
+- **Pro (pago único de 9.99 USD con PayPal):** filas ilimitadas, paginación automática, scroll infinito y exportación a Excel.
 
 ## Licencias con PayPal
 
