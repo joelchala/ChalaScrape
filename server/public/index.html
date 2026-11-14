@@ -12,7 +12,7 @@
     h1 { margin: 0 0 4px; font-size: 22px; }
     .price { color: var(--accent); font-size: 28px; font-weight: 700; margin: 8px 0; }
     ul { color: var(--muted); padding-left: 20px; margin: 0 0 20px; }
-    #paypal { background: #fff; border-radius: 10px; padding: 12px 12px 4px; min-height: 60px; }
+    #paypal-buttons { background: #fff; border-radius: 10px; padding: 12px 12px 4px; min-height: 60px; }
     #msg { min-height: 1.5em; margin: 12px 0 0; color: var(--muted); }
     #done code { display: block; margin: 12px 0; padding: 12px; background: var(--bg); border: 1px solid var(--primary); border-radius: 10px; font-size: 18px; text-align: center; word-break: break-all; user-select: all; }
     button { font: inherit; font-weight: 600; cursor: pointer; background: var(--primary); color: var(--bg); border: 0; border-radius: 8px; padding: 8px 14px; }
@@ -30,7 +30,7 @@
       <li data-t="b3"></li>
     </ul>
     <div id="buy">
-      <div id="paypal"></div>
+      <div id="paypal-buttons"></div>
       <p id="msg" role="status" aria-live="polite"></p>
     </div>
     <div id="done" hidden>
@@ -103,7 +103,7 @@
             $('done').hidden = false;
           },
           onError: () => { $('msg').textContent = t.failed; },
-        }).render('#paypal');
+        }).render("#paypal-buttons");
       } catch {
         $('msg').textContent = t.down;
       }
