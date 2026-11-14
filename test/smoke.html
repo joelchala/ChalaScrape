@@ -1,0 +1,167 @@
+<!doctype html>
+<meta charset="utf-8">
+<title>ChalaScrape smoke…</title>
+<!--
+  Autoverificación de detector + panel sin instalar la extensión.
+  Servir la raíz del proyecto por HTTP (python -m http.server 8765) y abrir /test/smoke.html.
+  Simula chrome.* y corre el detector sobre esta página y el panel en un iframe.
+  No cubre background.js ni permisos reales (eso se prueba cargando la extensión). No va en el ZIP de la tienda.
+-->
+<nav><ul><li><a href="/a">Inicio</a></li><li><a href="/b">Tienda</a></li><li><a href="/c">Contacto</a></li></ul></nav>
+<div class="grid" id="cards"></div>
+<table id="people">
+  <thead><tr><th>Nombre</th><th>País</th></tr></thead>
+  <tbody></tbody>
+</table>
+<button id="nextBtn" class="pager-next" type="button">Siguiente ›</button>
+<iframe id="panel" style="width:380px;height:700px;border:1px solid #ccc"></iframe>
+<pre id="out"></pre>
+
+<script type="module">
+  // ---------- Página de ejemplo ----------
+  const cards = document.getElementById('cards');
+  for (let i = 1; i <= 6; i++) {
+    cards.insertAdjacentHTML('beforeend', `<article class="card"><img src="/img/${i}.png" width="120" height="90" alt="">
+      <h3 class="title"><a href="/p/${i}">Producto ${i}</a></h3><span class="price">${i === 2 ? '-5.00' : '$' + i + '0.00'}</span>
+      <span class="sku">${i === 1 ? '=SUM(1,2)' : 'SKU-' + i}</span></article>`);
+  }
+  let page = 1;
+  const fill = () => {
+    document.querySelector('#people tbody').innerHTML = Array.from({ length: 60 }, (_, i) =>
+      `<tr><td><a href="/u/${page}-${i}">Año ${page}-${i}</a></td><td>RD</td></tr>`).join('');
+  };
+  fill();
+  const nextBtn = document.getElementById('nextBtn');
+  nextBtn.addEventListener('click', () => { page++; fill(); if (page === 2) nextBtn.disabled = true; });
+
+  // ---------- chrome.* simulado ----------
+  const msgs = await (await fetch('../_locales/es/messages.json')).json();
+  const listeners = [];
+  const store = {};
+  window.chrome = {
+    i18n: {
+      getMessage: (k, subs = []) => (msgs[k]?.message || '').replace(/\$(\d)/g, (_, n) => subs[n - 1] ?? ''),
+      getUILanguage: () => 'es',
+    },
+    runtime: {
+      getManifest: () => ({}), // sin update_url = instalación de desarrollo
+      onMessage: { addListener: (f) => listeners.push(f) },
+      sendMessage: async (m) => {
+        let out;
+        for (const f of listeners) f(m.toTab ? m.payload : m, {}, (r) => { out = r; });
+        return out;
+      },
+    },
+    storage: {
+      local: {
+        get: async (k) => ({ [k]: store[k] }),
+        set: async (o) => { Object.assign(store, structuredClone(o)); },
+        remove: async (k) => { delete store[k]; },
+      },
+      session: { get: async () => ({ clickedTab: 1 }) },
+    },
+    tabs: { query: async () => [{ id: 1 }], get: async () => ({ status: 'complete' }) },
+  };
+
+  // ---------- Carga del detector y del panel ----------
+  await new Promise((res, rej) => {
+    const s = Object.assign(document.createElement('script'), { src: '../content/detector.js', onload: res, onerror: rej });
+    document.head.append(s);
+  });
+  const frame = document.getElementById('panel');
+  const html = await (await fetch('../sidepanel/index.html')).text();
+  frame.srcdoc = html.replace('<head>', `<head><base href="../sidepanel/"><script>
+    window.chrome = parent.chrome;
+    window.confirm = () => true;
+    URL.createObjectURL = (b) => { parent.lastBlob = b; return 'about:blank#'; };
+    HTMLAnchorElement.prototype.click = () => {};
+  <\/script>`);
+  await new Promise((r) => frame.addEventListener('load', r, { once: true }));
+  const doc = frame.contentDocument;
+  const p = (id) => doc.getElementById(id);
+
+  // ---------- Pruebas ----------
+  const log = [];
+  let failed = 0;
+  const ok = (cond, name) => { log.push(`${cond ? 'PASS' : 'FAIL'}  ${name}`); if (!cond) failed++; };
+  const until = async (fn, ms = 8000) => {
+    for (const end = Date.now() + ms; Date.now() < end;) {
+      if (fn()) return true;
+      await new Promise((r) => setTimeout(r, 50));
+    }
+    return false;
+  };
+  const bodyRows = () => doc.querySelectorAll('#grid tbody tr').length;
+  const heads = () => [...doc.querySelectorAll('#grid thead input')].map((i) => i.value);
+  const csvText = async () => new TextDecoder('utf-8', { ignoreBOM: true }).decode(await window.lastBlob.arrayBuffer());
+
+  try {
+    ok(await until(() => bodyRows() === 60), 'autodetección: la tabla de 60 filas es el mejor grupo');
+    ok(heads().join('|') === 'Nombre|Nombre (enlace)|País', `encabezados de tabla: ${heads().join('|')}`);
+    ok(document.querySelector('#people').dataset.chalascrape === 'container', 'resaltado del contenedor en la página');
+    ok([...doc.querySelectorAll('[data-i18n]')].every((e) => e.textContent.trim()), 'i18n: ninguna clave vacía');
+
+    p('csvBtn').click();
+    let csv = await csvText();
+    ok(csv.charCodeAt(0) === 0xFEFF, 'CSV con BOM UTF-8');
+    ok(csv.trim().split('\r\n').length === 51, `Free: CSV limitado a 50 filas (${csv.trim().split('\r\n').length - 1})`);
+    ok(csv.includes('País') && csv.includes('Año 1-0'), 'CSV conserva tildes y ñ');
+    ok(p('status').textContent.includes('50'), 'aviso de límite Free');
+
+    p('xlsxBtn').click();
+    ok(p('licenseDlg').open, 'Free: Excel abre el modal de licencia');
+    p('licKey').value = 'CLAVE-FALSA';
+    p('licForm').requestSubmit();
+    ok(await until(() => p('licMsg').classList.contains('error')), 'clave inválida rechazada');
+    ok(!doc.body.classList.contains('is-pro'), 'sigue en Free tras clave inválida');
+    p('licKey').value = 'CHALA-DEV-2026';
+    p('licForm').requestSubmit();
+    ok(await until(() => doc.body.classList.contains('is-pro')), 'clave de desarrollo activa Pro');
+    p('licClose').click();
+
+    p('pickBtn').click();
+    await until(() => p('status').textContent.includes('Siguiente'));
+    nextBtn.dispatchEvent(new MouseEvent('mouseover', { bubbles: true }));
+    nextBtn.dispatchEvent(new MouseEvent('click', { bubbles: true, cancelable: true }));
+    ok(page === 1, 'elegir "Siguiente" no dispara el clic en la página');
+    ok(await until(() => p('nextLabel').textContent.includes('Siguiente')), 'botón "Siguiente" registrado en el panel');
+
+    p('delay').value = '1.5';
+    p('delay').dispatchEvent(new Event('input'));
+    p('runBtn').click();
+    ok(await until(() => p('status').textContent.startsWith('Listo'), 15000), 'paginación termina sola al deshabilitarse el botón');
+    ok(p('counts').textContent.startsWith('120 '), `paginación acumula 2 páginas sin duplicar: ${p('counts').textContent}`);
+    ok(store.data?.rows.length === 120, 'acumulado guardado en chrome.storage.local');
+
+    p('xlsxBtn').click();
+    const buf = new Uint8Array(await window.lastBlob.arrayBuffer());
+    const book = frame.contentWindow.XLSX.read(buf, { type: 'array' }); // el Uint8Array es de otro realm: hay que indicar el tipo
+    const sheetRows = frame.contentWindow.XLSX.utils.sheet_to_json(book.Sheets[book.SheetNames[0]], { header: 1 });
+    ok(buf[0] === 0x50 && buf[1] === 0x4B && sheetRows.length === 121, `Pro: XLSX real con todas las filas (${sheetRows.length - 1})`);
+
+    const first = doc.querySelector('#grid thead input');
+    first.value = 'Cliente';
+    first.dispatchEvent(new Event('change'));
+    doc.querySelectorAll('.col-del')[1].click();
+    ok(heads().join('|') === 'Cliente|País', `renombrar y eliminar columna: ${heads().join('|')}`);
+    p('csvBtn').click();
+    csv = await csvText();
+    ok(csv.startsWith('﻿Cliente,País\r\n') && csv.trim().split('\r\n').length === 121, 'CSV Pro refleja columnas editadas y todas las filas');
+
+    for (let i = 0; i < 12 && !heads().includes('title'); i++) {
+      p('cycleBtn').click();
+      await new Promise((r) => setTimeout(r, 150));
+    }
+    ok(bodyRows() === 6, `"Cambiar selección" llega a las 6 tarjetas (${bodyRows()})`);
+    ok(heads().join('|') === 'card (imagen)|title|title (enlace)|price|sku', `columnas de tarjetas: ${heads().join('|')}`);
+    const cells = [...doc.querySelectorAll('#grid tbody tr:first-child td')].map((td) => td.textContent);
+    ok(cells[0] === location.origin + '/img/1.png' && cells[2] === location.origin + '/p/1', 'URLs absolutas de imagen y enlace');
+    p('csvBtn').click();
+    csv = await csvText();
+    ok(csv.includes("'=SUM(1,2)") && csv.includes(',-5.00,'), 'CSV neutraliza fórmulas sin tocar números negativos');
+  } catch (e) {
+    ok(false, `excepción: ${e.stack || e}`);
+  }
+  document.getElementById('out').textContent = log.join('\n') + `\n\n${failed ? failed + ' FALLARON' : 'TODO OK'}`;
+  document.title = failed ? 'ChalaScrape smoke: FAIL' : 'ChalaScrape smoke: PASS';
+</script>

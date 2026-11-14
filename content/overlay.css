@@ -1,0 +1,14 @@
+/* ChalaScrape — resaltado sobre la página. Se usan atributos data-* para no tocar las clases del sitio. */
+[data-chalascrape="container"] {
+  outline: 3px solid #06B6D4 !important;
+  outline-offset: 3px !important;
+}
+[data-chalascrape="item"] {
+  outline: 2px dashed rgba(6, 182, 212, 0.75) !important;
+  outline-offset: -2px !important;
+}
+[data-chalascrape-pick] {
+  outline: 3px solid #10B981 !important;
+  outline-offset: 2px !important;
+  cursor: crosshair !important;
+}
