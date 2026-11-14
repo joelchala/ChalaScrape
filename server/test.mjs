@@ -59,7 +59,7 @@ assert.deepEqual([valid.data, valid.cors], [{ valid: true }, '*']);
 assert.deepEqual((await call('license', { key: 'REFUNDED0000000001' })).data, { valid: false }, 'reembolso invalida');
 assert.deepEqual((await call('license', { key: 'OTHERPRODUCT000001' })).data, { valid: false }, 'otro producto no vale');
 assert.deepEqual((await call('license', { key: 'NOEXISTE0000000001' })).data, { valid: false });
-assert.deepEqual((await call('license', { key: 'AJENO0000000000001' })).data, { valid: false }, 'cobro ajeno o inexistente (401 real de PayPal)');
+assert.equal((await call('license', { key: 'AJENO0000000000001' })).status, 502, 'falta de permisos no es "inválida"');
 assert.equal((await call('license', { key: 'PAYPALDOWN00000001' })).status, 502, 'caída de PayPal no es "inválida"');
 assert.equal((await call('license', { key: 'TOKENMALO000000001' })).status, 502, 'fallo de credenciales no es "inválida"');
 
@@ -70,6 +70,13 @@ assert.deepEqual((await call('license', { key: { $ne: 1 } })).data, { valid: fal
 assert.equal((await call('capture', { orderID: 'X/../../captures/Y' })).status, 400);
 assert.equal(calls.length, before, 'IDs inválidos no generan llamadas a PayPal');
 assert.equal((await call('borrar')).status, 404);
+
+// Secreto vacío: debe fallar antes de hablar con PayPal, que lo aceptaría con un token limitado.
+process.env.PAYPAL_CLIENT_SECRET = '';
+const callsBefore = calls.length;
+assert.equal((await call('create')).status, 502);
+assert.equal(calls.length, callsBefore, 'sin secreto no se llama a PayPal');
+process.env.PAYPAL_CLIENT_SECRET = 'sec';
 
 console.error = silent;
 console.log('server: TODO OK');

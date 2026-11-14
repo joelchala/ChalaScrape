@@ -30,6 +30,8 @@ const json = (data, status = 200) => Response.json(data, { status, headers: CORS
 
 async function paypal(path, method = 'GET', body) {
   const { id, secret, base } = env();
+  // Con el secreto vacío PayPal igual entrega un token, pero limitado: crea órdenes y luego responde 403 al cobrarlas.
+  if (!id || !secret) throw new Error('Falta PAYPAL_CLIENT_ID o PAYPAL_CLIENT_SECRET');
   const auth = await fetch(`${base}/v1/oauth2/token`, {
     method: 'POST',
     headers: {
@@ -71,20 +73,11 @@ const actions = {
     return json({ key: capture.id });
   },
 
-  // TEMPORAL (diagnóstico): ¿este token puede usar la API de suscripciones, como ChalaVPN?
-  async probe() {
-    const plans = await paypal('/v1/billing/plans?page_size=1');
-    const products = await paypal('/v1/catalogs/products?page_size=1');
-    const sub = await paypal('/v1/billing/subscriptions/I-NOEXISTE00001');
-    return json({ plans: plans.status, products: products.status, subscription: [sub.status, sub.data.name] });
-  },
-
   async license({ key }) {
     const id = String(key || '').trim().toUpperCase();
     if (!PAYPAL_ID.test(id)) return json({ valid: false });
     const { status, data } = await paypal(`/v2/payments/captures/${id}`);
-    // PayPal contesta 401 NOT_AUTHORIZED (no 404) cuando el cobro no existe o es de otra cuenta.
-    if (status === 404 || (status === 401 && data.name === 'NOT_AUTHORIZED')) return json({ valid: false });
+    if (status === 404) return json({ valid: false });
     // Cualquier otro fallo (credenciales, límite de tasa, caída) NO es "clave inválida":
     // responder false le quitaría Pro a clientes que sí pagaron.
     if (status !== 200) throw new Error(`PayPal capture ${status} ${JSON.stringify(data).slice(0, 300)}`);
