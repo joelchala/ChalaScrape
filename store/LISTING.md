@@ -159,9 +159,10 @@ Data: no analytics, no ads, no personal data collected.
 
 - **Borrador creado:** 14/11/2026. Paquete `ChalaScrape-1.0.0.zip` subido y verificado por Partner Center (idiomas: español e inglés; permisos: sidePanel, activeTab, scripting, storage).
 - **Product ID:** `b99d44ce-b19b-4c06-a5f2-9b1657ae771d`
-- **Estado al 14/11/2026, 06:50:** «In draft». **No se ha enviado a revisión.** Revisado en el panel:
+- **Estado al 14/11/2026, 07:20:** «In draft». **No se ha enviado a revisión.** Textos cargados y guardados en el panel:
   - *Availability*: valores por defecto (Public, 241 de 241 mercados).
-  - *Properties*: vacío (falta la categoría, que es obligatoria).
-  - *Privacy*: vacío (propósito único, las cuatro justificaciones, código remoto, datos y certificaciones).
-  - *Store listings*: inglés y español en «Incomplete», sin descripción ni logo.
+  - *Properties*: categoría Productivity, sitio web y contacto de soporte.
+  - *Privacy*: propósito único, las cuatro justificaciones, sin código remoto, dato declarado «Authentication information», URL de la política y las tres certificaciones marcadas.
+  - *Store listings*: descripción y cinco términos de búsqueda en inglés y en español. Ambos idiomas siguen en «Incomplete» porque falta el logo.
+- **Falta para enviar:** subir en cada idioma el logo (`logo-300x300.png`), las tres capturas y el mosaico, guardar, y pulsar **Publish** con las notas de la sección 7.
 - Al enviar: anotar aquí la fecha y, cuando se publique, el Store ID, el CRX ID y la URL.

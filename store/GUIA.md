@@ -98,6 +98,8 @@ El paquete trae dos idiomas, inglés y español. El panel exige completar **al m
 | **YouTube video URL** | No | — | Dejar vacío |
 | **Search terms** | No | Hasta 7 términos, 30 caracteres cada uno, 21 palabras en total | Los de la sección 5 o 6 de LISTING.md |
 
+Los términos de búsqueda se agregan uno a uno: escribe el término y pulsa **Add Term**; solo cuentan los que quedan como etiqueta debajo del campo.
+
 Puedes usar **Duplicate** para copiar las imágenes de un idioma al otro. No uses **Generate with AI** para la descripción: sustituiría el texto ya revisado.
 
 Pulsa **Save draft**. La columna **Status** de cada idioma debe quedar en `Complete`; solo entonces se activa **Publish**.
