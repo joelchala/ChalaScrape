@@ -1,6 +1,6 @@
 {
-  "extName": { "message": "ChalaScrape: web data extractor to Excel & CSV" },
-  "extDescription": { "message": "Extract tables, lists and cards from any website to Excel (.xlsx) or CSV in one click. 100% in your browser, no servers." },
+  "extName": { "message": "ChalaScrape: web data to Excel & CSV" },
+  "extDescription": { "message": "Extract tables, lists and cards from any website to Excel (.xlsx) or CSV in one click. Your data is processed in your browser." },
   "actionTitle": { "message": "Open ChalaScrape" },
 
   "detect": { "message": "Detect data" },
