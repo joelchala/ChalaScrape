@@ -71,6 +71,17 @@ const actions = {
     return json({ key: capture.id });
   },
 
+  // TEMPORAL (diagnóstico): descarta el token en caché y pide uno nuevo para ver sus permisos reales.
+  async probe() {
+    const { id, secret, base } = env();
+    const headers = { Authorization: 'Basic ' + Buffer.from(`${id}:${secret}`).toString('base64'), 'Content-Type': 'application/x-www-form-urlencoded' };
+    const token = () => fetch(`${base}/v1/oauth2/token`, { method: 'POST', headers, body: 'grant_type=client_credentials' }).then((r) => r.json());
+    const old = await token();
+    const end = await fetch(`${base}/v1/oauth2/token/terminate`, { method: 'POST', headers, body: `token=${old.access_token}&token_type_hint=ACCESS_TOKEN` });
+    const fresh = await token();
+    return json({ oldExpires: old.expires_in, terminate: end.status, newExpires: fresh.expires_in, sameToken: old.access_token === fresh.access_token, scope: fresh.scope, appId: fresh.app_id });
+  },
+
   async license({ key }) {
     const id = String(key || '').trim().toUpperCase();
     if (!PAYPAL_ID.test(id)) return json({ valid: false });
