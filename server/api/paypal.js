@@ -74,7 +74,7 @@ const actions = {
     if (status === 404) return json({ valid: false });
     // Cualquier otro fallo (credenciales, límite de tasa, caída) NO es "clave inválida":
     // responder false le quitaría Pro a clientes que sí pagaron.
-    if (status !== 200) throw new Error(`PayPal capture ${status}`);
+    if (status !== 200) throw new Error(`PayPal capture ${status} ${JSON.stringify(data).slice(0, 300)}`);
     return json({ valid: data.status === 'COMPLETED' && data.custom_id === PRODUCT });
   },
 };
