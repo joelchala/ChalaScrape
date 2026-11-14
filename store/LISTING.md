@@ -157,4 +157,11 @@ Data: no analytics, no ads, no personal data collected.
 
 ## 9. Estado del envío
 
-- Sin enviar.
+- **Borrador creado:** 14/11/2026. Paquete `ChalaScrape-1.0.0.zip` subido y verificado por Partner Center (idiomas: español e inglés; permisos: sidePanel, activeTab, scripting, storage).
+- **Product ID:** `b99d44ce-b19b-4c06-a5f2-9b1657ae771d`
+- **Estado al 14/11/2026, 06:50:** «In draft». **No se ha enviado a revisión.** Revisado en el panel:
+  - *Availability*: valores por defecto (Public, 241 de 241 mercados).
+  - *Properties*: vacío (falta la categoría, que es obligatoria).
+  - *Privacy*: vacío (propósito único, las cuatro justificaciones, código remoto, datos y certificaciones).
+  - *Store listings*: inglés y español en «Incomplete», sin descripción ni logo.
+- Al enviar: anotar aquí la fecha y, cuando se publique, el Store ID, el CRX ID y la URL.

@@ -60,7 +60,7 @@ Estas dos opciones se pueden cambiar después sin subir un paquete nuevo. Pulsa 
 
 | Opción | Obligatorio | Qué poner |
 |---|---|---|
-| **Category** | Sí | Productividad (*Productivity*) |
+| **Category** | Sí | `Productivity`. Las opciones son: Accessibility, Blogging, Developer Tools, Entertainment, News And Weather, Photos, Productivity, Search Tools, Shopping, Social, Communication y Sports |
 | **Website** | No | `https://chalascrape.vercel.app` |
 | **Support contact detail** | No | `info@chaladev.site` |
 | **Mature content** | No | Sin marcar |
@@ -71,8 +71,8 @@ El sitio web y el contacto se muestran a los usuarios. Pulsa **Save & Continue**
 
 | Opción | Qué poner |
 |---|---|
-| **Single Purpose Description** | El texto en inglés de [LISTING.md, sección 4](LISTING.md#4-privacidad) |
-| **Permission justification** | Una caja por permiso (`activeTab`, `scripting`, `sidePanel`, `storage`): los textos de la tabla de esa misma sección |
+| **Single purpose description** (máx. 1000 caracteres) | El texto en inglés de [LISTING.md, sección 4](LISTING.md#4-privacidad) |
+| **Permission justification** (máx. 1000 caracteres cada una) | Una caja por permiso (`sidePanel`, `activeTab`, `scripting`, `storage`): los textos de la tabla de esa misma sección |
 | **Are you using remote code?** | `No, I am not using remote code` |
 | **Data usage** → qué datos recopilas | Solo *Authentication information* (la clave de licencia). No marques *Website content*, historial ni actividad |
 | **Data usage** → certificaciones | Marca las tres |
@@ -84,7 +84,7 @@ Pulsa **Save & Continue**.
 
 ### 3.5 Store listings
 
-El paquete trae dos idiomas, español e inglés. Hay que completar **cada uno** con **Edit details**.
+El paquete trae dos idiomas, inglés y español. El panel exige completar **al menos uno** con **Edit details**; lo recomendable es completar los dos. Si quieres publicar ya con uno solo, quita el otro con **Remove** y agrégalo después.
 
 | Campo | Obligatorio | Límite | Qué poner |
 |---|---|---|---|
@@ -203,6 +203,6 @@ No hace falta volver a llenar la ficha, salvo que cambien los permisos: en ese c
 
 - **Tiempo de revisión de Chrome:** la documentación que leí no da un plazo; depende del tipo de elemento.
 - **Texto exacto de la opción de pagos en Chrome:** la documentación solo dice que la pestaña *Distribution* permite declarar si el elemento es de pago. «Con compras dentro de la aplicación» es lo que elegiste para ChalaVPN, según tu guía de ese proyecto.
-- **Categorías disponibles y límites de caracteres** del nombre, la descripción corta y las justificaciones: la documentación de Edge no los publica. El nombre tiene 36 caracteres y la descripción corta menos de 132, que son los límites que conozco de Chrome.
+- **Límites de caracteres del nombre y de la descripción corta en Edge:** su documentación no los publica. El nombre tiene 36 caracteres y la descripción corta menos de 132, que son los límites que conozco de Chrome. Partner Center aceptó el paquete el 14/11/2026 sin objetarlos.
 - **Qué casillas de «Data usage» corresponden a una clave de licencia:** marcar solo información de autenticación es mi criterio, no una regla escrita que haya encontrado.
 - **Requisitos de la cuenta de Chrome** (verificación de correo, verificación en dos pasos): no los revisé porque ya publicaste dos extensiones con esa cuenta.
