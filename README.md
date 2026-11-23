@@ -6,13 +6,17 @@ Extensión para Chrome y Edge (Manifest V3) que extrae tablas, listas y tarjetas
 
 | Carpeta | Qué es |
 |---|---|
-| `manifest.json`, `background.js` | Manifest V3 y service worker. Permisos: `sidePanel`, `activeTab`, `scripting`, `storage`. |
-| `content/` | Detector de patrones repetitivos, resaltado y extracción. Se inyecta bajo demanda. |
-| `sidepanel/` | Panel lateral: vista previa editable, paginación, exportación y licencias. |
-| `lib/` | SheetJS 0.20.3, incluido localmente. |
-| `_locales/` | Español (por defecto) e inglés. |
+| `manifest.json`, `background.js` | Manifest V3 (`v1.0.1`) y service worker. Permisos: `sidePanel`, `activeTab`, `scripting`, `storage`. |
+| `content/` | Detector de patrones repetitivos, resaltado y extracción (`detector.js`, `overlay.css`). Se inyecta bajo demanda. |
+| `sidepanel/` | Panel lateral: vista previa editable, paginación, exportación y licencias (`index.html`, `styles.css`, `app.js`, `license.js`). |
+| `icons/` | Logotipo SVG e iconos PNG (`16`, `32`, `48`, `128`). |
+| `lib/` | SheetJS 0.20.3 (`xlsx.full.min.js`), incluido localmente. |
+| `_locales/` | Español (`es`, por defecto) e inglés (`en`). |
 | `server/` | Backend de licencias con PayPal (Vercel Function, sin base de datos). |
-| `test/` | Pruebas. No van en el ZIP de la tienda. |
+| `scripts/pack.ps1` | Empaquetador que genera `dist/ChalaScrape-<versión>.zip` solo con los archivos de la extensión. |
+| `store/` | Fichas (`LISTING.md`, `CHROME.md`, `GUIA.md`) y capturas (`store/screenshots/`). |
+| `dist/` | Paquetes `.zip` listos para subir a Chrome Web Store y Microsoft Edge Add-ons. |
+| `test/` | Pruebas (`e2e.mjs`, `smoke.html`, `demo.html`). No van en el ZIP de la tienda. |
 
 ## Cargar la extensión
 
@@ -69,3 +73,15 @@ powershell -ExecutionPolicy Bypass -File scripts\pack.ps1
 ```
 
 Genera `dist/ChalaScrape-<versión>.zip` solo con lo que necesita la extensión. El paso a paso para subirla a cada tienda, con todas las opciones, está en [store/GUIA.md](store/GUIA.md). Los textos para copiar están en [store/LISTING.md](store/LISTING.md).
+
+## Suite Chala
+
+ChalaScrape forma parte de la **Suite Chala** de extensiones para navegador enfocadas en privacidad, rendimiento y productividad:
+
+- **[Chalablock](https://github.com/joelchala/Chalablock)** — Bloqueador de anuncios y rastreadores ligero (Manifest V3)
+- **[ChalaCookiesEdit](https://github.com/joelchala/ChalaCookiesEdit)** — Editor de cookies local con soporte CHIPS, incógnito, bloqueo e inspector JWT
+- **[ChalaDev](https://github.com/joelchala/ChalaDev)** — Suite de utilidades locales en el Side Panel para desarrolladores y diseñadores UI/UX
+- **[ChalaReader](https://github.com/joelchala/ChalaReader)** — Modo lectura limpio con Shadow DOM, temas visuales, Markdown, PDF y guardado offline
+- **[ChalaScrape](https://github.com/joelchala/ChalaScrape)** — Extractor visual de tablas, listas y tarjetas web a Excel (`.xlsx`) y CSV
+- **[ChalaTabs](https://github.com/joelchala/ChalaTabs)** — Gestor de pestañas en espacios de trabajo, ahorro de RAM y buscador instantáneo
+- **[ChalaVPN](https://github.com/joelchala/ChalaVPN)** — Proxy HTTPS/SOCKS5 con protección contra fugas de WebRTC
