@@ -26,11 +26,13 @@ Extensión para Chrome y Edge (Manifest V3) que extrae tablas, listas y tarjetas
 
 Para probar el plan Pro en desarrollo, pulsa la insignia **FREE** e ingresa `CHALA-DEV-2026`. Esa clave solo funciona en instalaciones sin empaquetar.
 
-## Estado (14/11/2026)
+## Estado y tiendas
 
-- **Edge Add-ons:** 1.0.0 en revisión desde el 14/11/2026. **Chrome Web Store:** en espera (cupo de extensiones). Detalle en [store/LISTING.md](store/LISTING.md) y [store/CHROME.md](store/CHROME.md).
-- **1.0.1** preparada (usa `scrape.chaladev.site`), sin lanzar: pasos en [store/LISTING.md](store/LISTING.md), sección 10.
-- **Backend:** `chalascrape.vercel.app` y `scrape.chaladev.site` (mismo proyecto de Vercel).
+- **Microsoft Edge Add-ons:** Publicada — [ChalaScrape en Edge Add-ons](https://microsoftedge.microsoft.com/addons/detail/chalascrape-datos-web-a-/onapjfkfnjifcegfkcdnjdobfddmddgi).
+- **Chrome Web Store:** en espera por límite de cupo de publicaciones en la cuenta. Detalle en [store/LISTING.md](store/LISTING.md) y [store/CHROME.md](store/CHROME.md).
+- **Sitio oficial (Suite Chala):** [chaladev.site](https://chaladev.site/) · **Contacto:** [info@chaladev.site](mailto:info@chaladev.site)
+- **Versión `1.0.1`** preparada (usa `scrape.chaladev.site`), pendiente de lanzamiento: pasos en [store/LISTING.md](store/LISTING.md), sección 10.
+- **Backend de licencias:** `chalascrape.vercel.app` y `scrape.chaladev.site` (mismo proyecto de Vercel).
 
 ## Planes
 
@@ -76,7 +78,7 @@ Genera `dist/ChalaScrape-<versión>.zip` solo con lo que necesita la extensión.
 
 ## Suite Chala
 
-ChalaScrape forma parte de la **Suite Chala** de extensiones para navegador enfocadas en privacidad, rendimiento y productividad:
+**ChalaScrape** forma parte de la **Suite Chala** ([chaladev.site](https://chaladev.site/)) de extensiones para navegador enfocadas en privacidad, rendimiento y productividad:
 
 - **[Chalablock](https://github.com/joelchala/Chalablock)** — Bloqueador de anuncios y rastreadores ligero (Manifest V3)
 - **[ChalaCookiesEdit](https://github.com/joelchala/ChalaCookiesEdit)** — Editor de cookies local con soporte CHIPS, incógnito, bloqueo e inspector JWT
