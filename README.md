@@ -20,8 +20,8 @@ Extensión para Google Chrome, Microsoft Edge y Mozilla Firefox (Manifest V3) qu
 
 ## Cargar la extensión
 
-1. Abre `chrome://extensions` (o `edge://extensions`) y activa **Modo de desarrollador**.
-2. **Cargar descomprimida** y elige la raíz de este repositorio.
+1. **Chrome / Edge:** abre `chrome://extensions` (o `edge://extensions`), activa **Modo de desarrollador**, pulsa **Cargar descomprimida** y elige la raíz de este repositorio.
+2. **Mozilla Firefox (carga temporal):** ejecuta `scripts\pack.ps1`, abre `about:debugging#/runtime/this-firefox`, pulsa **Cargar complemento temporal…** y selecciona `dist/ChalaScrape-1.0.1-firefox.zip`.
 3. Abre una página con un listado y haz clic en el icono de ChalaScrape.
 
 Para probar el plan Pro en desarrollo, pulsa la insignia **FREE** e ingresa `CHALA-DEV-2026`. Esa clave solo funciona en instalaciones sin empaquetar.
@@ -29,6 +29,7 @@ Para probar el plan Pro en desarrollo, pulsa la insignia **FREE** e ingresa `CHA
 ## Estado y tiendas
 
 - **Microsoft Edge Add-ons:** Publicada — [ChalaScrape en Edge Add-ons](https://microsoftedge.microsoft.com/addons/detail/chalascrape-datos-web-a-/onapjfkfnjifcegfkcdnjdobfddmddgi).
+- **Mozilla Firefox Add-ons (AMO):** paquete `dist/ChalaScrape-1.0.1-firefox.zip` (`chalascrape@chaladev.site`, `sidebar_action`) validado en AMO con 0 errores, en cola de publicación.
 - **Chrome Web Store:** en espera por límite de cupo de publicaciones en la cuenta. Detalle en [store/LISTING.md](store/LISTING.md) y [store/CHROME.md](store/CHROME.md).
 - **Sitio oficial (Suite Chala):** [chaladev.site](https://chaladev.site/) · **Contacto:** [info@chaladev.site](mailto:info@chaladev.site)
 - **Versión `1.0.1`** preparada (usa `scrape.chaladev.site`), pendiente de lanzamiento: pasos en [store/LISTING.md](store/LISTING.md), sección 10.
