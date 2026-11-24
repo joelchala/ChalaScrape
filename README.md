@@ -1,6 +1,6 @@
 # ChalaScrape
 
-Extensión para Chrome y Edge (Manifest V3) que extrae tablas, listas y tarjetas de cualquier web a Excel (`.xlsx`) o CSV con un clic. La extracción corre 100 % en el navegador; el único servidor es el de licencias.
+Extensión para Google Chrome, Microsoft Edge y Mozilla Firefox (Manifest V3) que extrae tablas, listas y tarjetas de cualquier web a Excel (`.xlsx`) o CSV con un clic. La extracción corre 100 % en el navegador; el único servidor es el de licencias.
 
 ## Estructura
 
@@ -13,9 +13,9 @@ Extensión para Chrome y Edge (Manifest V3) que extrae tablas, listas y tarjetas
 | `lib/` | SheetJS 0.20.3 (`xlsx.full.min.js`), incluido localmente. |
 | `_locales/` | Español (`es`, por defecto) e inglés (`en`). |
 | `server/` | Backend de licencias con PayPal (Vercel Function, sin base de datos). |
-| `scripts/pack.ps1` | Empaquetador que genera `dist/ChalaScrape-<versión>.zip` solo con los archivos de la extensión. |
+| `scripts/pack.ps1` | Empaquetador que genera `dist/ChalaScrape-<versión>.zip` (Chrome/Edge) y `dist/ChalaScrape-<versión>-firefox.zip` (Firefox AMO con `sidebar_action`). |
 | `store/` | Fichas (`LISTING.md`, `CHROME.md`, `GUIA.md`) y capturas (`store/screenshots/`). |
-| `dist/` | Paquetes `.zip` listos para subir a Chrome Web Store y Microsoft Edge Add-ons. |
+| `dist/` | Paquetes `.zip` listos para subir a Chrome Web Store, Microsoft Edge Add-ons y Mozilla Firefox AMO. |
 | `test/` | Pruebas (`e2e.mjs`, `smoke.html`, `demo.html`). No van en el ZIP de la tienda. |
 
 ## Cargar la extensión
@@ -74,7 +74,7 @@ node test/e2e.mjs "C:\Program Files\Google\Chrome\Application\chrome.exe" "<ruta
 powershell -ExecutionPolicy Bypass -File scripts\pack.ps1
 ```
 
-Genera `dist/ChalaScrape-<versión>.zip` solo con lo que necesita la extensión. El paso a paso para subirla a cada tienda, con todas las opciones, está en [store/GUIA.md](store/GUIA.md). Los textos para copiar están en [store/LISTING.md](store/LISTING.md).
+Genera `dist/ChalaScrape-<versión>.zip` (Chrome/Edge) y `dist/ChalaScrape-<versión>-firefox.zip` (`chalascrape@chaladev.site`, Firefox `>= 115.0` con `sidebar_action` y `data_collection_permissions`) solo con lo que necesita la extensión. El paso a paso para subirla a cada tienda, con todas las opciones, está en [store/GUIA.md](store/GUIA.md). Los textos para copiar están en [store/LISTING.md](store/LISTING.md).
 
 ## Suite Chala
 
