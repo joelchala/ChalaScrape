@@ -29,7 +29,7 @@ Para probar el plan Pro en desarrollo, pulsa la insignia **FREE** e ingresa `CHA
 ## Estado y tiendas
 
 - **Microsoft Edge Add-ons:** Publicada — [ChalaScrape en Edge Add-ons](https://microsoftedge.microsoft.com/addons/detail/chalascrape-datos-web-a-/onapjfkfnjifcegfkcdnjdobfddmddgi).
-- **Mozilla Firefox Add-ons (AMO):** paquete `dist/ChalaScrape-1.0.1-firefox.zip` (`chalascrape@chaladev.site`, `sidebar_action`) validado en AMO con 0 errores, en cola de publicación.
+- **Mozilla Firefox Add-ons (AMO):** envío registrado en revisión (`chalascrape`, ID `3141737`, `chalascrape@chaladev.site`, `sidebar_action`).
 - **Chrome Web Store:** en espera por límite de cupo de publicaciones en la cuenta. Detalle en [store/LISTING.md](store/LISTING.md) y [store/CHROME.md](store/CHROME.md).
 - **Sitio oficial (Suite Chala):** [chaladev.site](https://chaladev.site/) · **Contacto:** [info@chaladev.site](mailto:info@chaladev.site)
 - **Versión `1.0.1`** preparada (usa `scrape.chaladev.site`), pendiente de lanzamiento: pasos en [store/LISTING.md](store/LISTING.md), sección 10.
