@@ -57,6 +57,7 @@ Certifica las tres declaraciones (no se venden datos, no se usan para fines ajen
 - **Logo (300×300):** `store/screenshots/logo-300x300.png`
 - **Capturas (1280×800):** `store/screenshots/01-deteccion-tarjetas.png`, `02-tabla-detectada.png`, `03-plan-pro.png`
 - **Mosaico promocional pequeño (440×280):** `store/screenshots/promo-440x280.png`
+- **Mosaico promocional grande / destacada (1400×560):** `store/screenshots/destacada-1400x560.png`
 - **Términos de búsqueda:** `extraer datos web`, `web scraper`, `exportar a excel`, `tabla a csv`, `extraer tabla`
 
 **Descripción:**
@@ -157,7 +158,7 @@ Data: no analytics, no ads, no personal data collected.
 
 ## 9. Estado del envío
 
-- **Enviado a revisión:** 14/11/2026, 07:17, versión 1.0.0. Estado en Partner Center: «In review». Microsoft indica hasta 7 días hábiles.
+- **Publicada:** versión **1.0.1** publicada en Microsoft Edge Add-ons (`onapjfkfnjifcegfkcdnjdobfddmddgi`) y enviada a Mozilla Firefox AMO (`3141737`). URL: `https://microsoftedge.microsoft.com/addons/detail/chalascrape-datos-web-a-/onapjfkfnjifcegfkcdnjdobfddmddgi`.
 - **Store ID:** `0RDCKC32CR7V` · **CRX ID:** `onapjfkfnjifcegfkcdnjdobfddmddgi` · **Product ID:** `b99d44ce-b19b-4c06-a5f2-9b1657ae771d`
 - **URL pública:** disponible cuando se publique. Será `https://microsoftedge.microsoft.com/addons/detail/onapjfkfnjifcegfkcdnjdobfddmddgi`.
 - **Lo enviado:** categoría Productivity, visibilidad Public en 241 mercados, idiomas español e inglés, dato declarado «Authentication information», y las notas de certificación de la sección 7 con la opción «Yes, I need to provide credentials, accounts, or other info for testers».
