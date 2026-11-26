@@ -24,6 +24,7 @@ ChalaScrape no usa inicio de sesión, así que no hay que registrar el ID del el
 | Icono de la tienda (128×128, con margen transparente) | `store/screenshots/icono-tienda-128.png` |
 | Capturas (1280×800) | `store/screenshots/01-deteccion-tarjetas.png`, `02-tabla-detectada.png`, `03-plan-pro.png` |
 | Mosaico promocional pequeño (440×280) | `store/screenshots/promo-440x280.png` |
+| Mosaico promocional grande / marquesina (1400×560) | `store/screenshots/destacada-1400x560.png` |
 | Sitio web oficial | `https://chalascrape.vercel.app` |
 | URL de asistencia | `https://chalascrape.vercel.app/privacy.html` (contacto: `info@chaladev.site`) |
 
